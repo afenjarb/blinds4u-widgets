@@ -50,6 +50,18 @@ class Categories_Grid_Widget extends \Elementor\Widget_Base {
         $repeater = new \Elementor\Repeater();
 
         $repeater->add_control(
+            'show_banner',
+            [
+                'label' => 'הצג באנר',
+                'type' => \Elementor\Controls_Manager::SWITCHER,
+                'label_on' => 'כן',
+                'label_off' => 'לא',
+                'return_value' => 'yes',
+                'default' => 'yes',
+            ]
+        );
+
+        $repeater->add_control(
             'title',
             [
                 'label' => 'כותרת',
@@ -91,20 +103,52 @@ class Categories_Grid_Widget extends \Elementor\Widget_Base {
 
         //BANNER CONTROLS
         $repeater->add_control(
+            'banner_text_small',
+            [
+                'label' => 'טקסט קטן לבאנר',
+                'type' => \Elementor\Controls_Manager::WYSIWYG,
+                'default' => 'עד',
+                'rows' => 3,
+                'condition' => [
+                    'show_banner' => 'yes',
+                ],
+            ]
+        );
+
+        $repeater->add_control(
+            'banner_text_large',
+            [
+                'label' => 'טקסט גדול לבאנר',
+                'type' => \Elementor\Controls_Manager::WYSIWYG,
+                'default' => '40% הנחה',
+                'rows' => 3,
+                'condition' => [
+                    'show_banner' => 'yes',
+                ],
+            ]
+        );
+
+        $repeater->add_control(
             'banner_gradient_start',
             [
-                'label' => 'צבע התחלתי לבאנר',
+                'label' => 'צבע באנר ראשון',
                 'type' => \Elementor\Controls_Manager::COLOR,
-                'default' => '#4266ae',  // Your original start color
+                'default' => '#4266ae',
+                'condition' => [
+                    'show_banner' => 'yes',
+                ],
             ]
         );
     
         $repeater->add_control(
             'banner_gradient_end',
             [
-                'label' => 'צבע סופי לבאנר',
+                'label' => 'צבע באנר שני',
                 'type' => \Elementor\Controls_Manager::COLOR,
-                'default' => '#022d82',  // Your original end color
+                'default' => '#022d82',
+                'condition' => [
+                    'show_banner' => 'yes',
+                ],
             ]
         );
 
@@ -121,7 +165,7 @@ class Categories_Grid_Widget extends \Elementor\Widget_Base {
 
         $this->end_controls_section();
 
-        // Title Style
+        // Title Style Section
         $this->start_controls_section(
             'title_style_section',
             [
@@ -160,7 +204,7 @@ class Categories_Grid_Widget extends \Elementor\Widget_Base {
 
         $this->end_controls_section();
 
-        // Content Style
+        // Content Style Section
         $this->start_controls_section(
             'content_style_section',
             [
@@ -190,6 +234,177 @@ class Categories_Grid_Widget extends \Elementor\Widget_Base {
         );
 
         $this->end_controls_section();
+        
+
+        $this->start_controls_section(
+            'banner_text_style_section',
+            [
+                'label' => 'סגנון טקסט באנר',
+                'tab' => \Elementor\Controls_Manager::TAB_STYLE,
+            ]
+        );
+        
+        // Position Controls (moved outside of text sections)
+        $this->add_control(
+            'banner_position_heading',
+            [
+                'label' => 'מיקום טקסטים בבאנר',
+                'type' => \Elementor\Controls_Manager::HEADING,
+                'separator' => 'before',
+            ]
+        );
+        
+        $this->add_responsive_control(
+            'banner_offset_x',
+            [
+                'label' => 'מיקום X',
+                'type' => \Elementor\Controls_Manager::SLIDER,
+                'size_units' => ['px'],
+                'range' => [
+                    'px' => [
+                        'min' => -200,
+                        'max' => 200,
+                        'step' => 1,
+                    ],
+                ],
+                'default' => [
+                    'unit' => 'px',
+                    'size' => -60,
+                ],
+                'tablet_default' => [
+                    'unit' => 'px',
+                    'size' => -60,
+                ],
+                'mobile_default' => [
+                    'unit' => 'px',
+                    'size' => -60,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .blinds-category-grid-banner-texts' => 'left: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
+        
+        $this->add_responsive_control(
+            'banner_offset_y',
+            [
+                'label' => 'מיקום Y',
+                'type' => \Elementor\Controls_Manager::SLIDER,
+                'size_units' => ['px'],
+                'range' => [
+                    'px' => [
+                        'min' => -200,
+                        'max' => 200,
+                        'step' => 1,
+                    ],
+                ],
+                'default' => [
+                    'unit' => 'px',
+                    'size' => -20,
+                ],
+                'tablet_default' => [
+                    'unit' => 'px',
+                    'size' => -20,
+                ],
+                'mobile_default' => [
+                    'unit' => 'px',
+                    'size' => -20,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .blinds-category-grid-banner-texts' => 'top: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
+        
+        // Small Text Style
+        $this->add_control(
+            'small_text_style_heading',
+            [
+                'label' => 'טקסט קטן',
+                'type' => \Elementor\Controls_Manager::HEADING,
+                'separator' => 'before',
+            ]
+        );
+        
+        $this->add_responsive_control(
+            'small_text_font_size',
+            [
+                'label' => 'גודל טקסט',
+                'type' => \Elementor\Controls_Manager::SLIDER,
+                'size_units' => ['px'],
+                'range' => [
+                    'px' => [
+                        'min' => 10,
+                        'max' => 50,
+                        'step' => 1,
+                    ],
+                ],
+                'default' => [
+                    'unit' => 'px',
+                    'size' => 26,
+                ],
+                'tablet_default' => [
+                    'unit' => 'px',
+                    'size' => 22,
+                ],
+                'mobile_default' => [
+                    'unit' => 'px',
+                    'size' => 20,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .blinds-category-grid-small-text' => 'font-size: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
+        
+        // Large Text Style
+        $this->add_control(
+            'large_text_style_heading',
+            [
+                'label' => 'טקסט גדול',
+                'type' => \Elementor\Controls_Manager::HEADING,
+                'separator' => 'before',
+            ]
+        );
+        
+        $this->add_responsive_control(
+            'large_text_font_size',
+            [
+                'label' => 'גודל טקסט',
+                'type' => \Elementor\Controls_Manager::SLIDER,
+                'size_units' => ['px'],
+                'range' => [
+                    'px' => [
+                        'min' => 20,
+                        'max' => 100,
+                        'step' => 1,
+                    ],
+                ],
+                'default' => [
+                    'unit' => 'px',
+                    'size' => 55,
+                ],
+                'tablet_default' => [
+                    'unit' => 'px',
+                    'size' => 45,
+                ],
+                'mobile_default' => [
+                    'unit' => 'px',
+                    'size' => 40,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .blinds-category-grid-large-text' => 'font-size: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
+        
+        $this->end_controls_section();
+
+
+
+
+
+
     }
 
     protected function render() {
@@ -201,19 +416,25 @@ class Categories_Grid_Widget extends \Elementor\Widget_Base {
                 $nofollow = $item['item_link']['nofollow'] ? ' rel="nofollow"' : '';
                 $url = $item['item_link']['url'] ? $item['item_link']['url'] : '#';
                 
-                $start_color = !empty($item['banner_gradient_start']) ? $item['banner_gradient_start'] : '#4266ae';
-                $end_color = !empty($item['banner_gradient_end']) ? $item['banner_gradient_end'] : '#022d82';
+                $show_banner = isset($item['show_banner']) && $item['show_banner'] === 'yes';
                 
-                // Generate SVG with index for unique gradient IDs
-                $banner_svg = $this->generate_banner_svg($start_color, $end_color, $index);
+                if ($show_banner) {
+                    $start_color = !empty($item['banner_gradient_start']) ? $item['banner_gradient_start'] : '#4266ae';
+                    $end_color = !empty($item['banner_gradient_end']) ? $item['banner_gradient_end'] : '#022d82';
+                    $banner_svg = $this->generate_banner_svg($start_color, $end_color, $index);
+                }
             ?>
                 <a href="<?php echo esc_url($url); ?>"<?php echo $target . $nofollow; ?> class="blinds-category-item-link">
                     <div class="blinds-category-item" style="background-image: url('<?php echo $item['background_image']['url']; ?>');">
-                        <div class="blinds-category-banner">
-                            <img src="<?php echo esc_attr($banner_svg); ?>" 
-                                alt="Category Banner" 
-                                class="blinds-category-grid-banner-svg">
-                        </div>
+                        <?php if ($show_banner) : ?>
+                            <div class="blinds-category-banner">
+                                <div class="blinds-category-grid-banner-texts">
+                                    <span class="blinds-category-grid-small-text"><?php echo wp_kses_post($item['banner_text_small']); ?></span>
+                                    <span class="blinds-category-grid-large-text"><?php echo wp_kses_post($item['banner_text_large']); ?></span>
+                                </div>
+                                <img src="<?php echo esc_attr($banner_svg); ?>" alt="Category Banner" class="blinds-category-grid-banner-svg">
+                            </div>
+                        <?php endif; ?>
                         <h3 class="blinds-category-item-title"><?php echo $item['title']; ?></h3>
                         <div class="blinds-category-item-content"><?php echo $item['content']; ?></div>
                     </div>

@@ -106,27 +106,59 @@
     margin-left: -2px;
     z-index: 2;
     pointer-events: none;
-    line-height: 0; /* Added to prevent extra space */
 }
 
 .blinds-category-grid-banner-svg {
-    width: 220px;
-    height: 220px;
+    width: 240px;
+    height: 240px;
     display: block;
-    max-width: none; /* Prevent WordPress from constraining the image */
+    max-width: none;
 }
 
 @media (max-width: 767px) {
     .blinds-category-grid-banner-svg {
-        width: 169px;
-        height: 169px;
+        width: 175px;
+        height: 175px;
     }
 }
 
 /*Laptops*/
 @media screen and (min-device-width: 1200px) and (max-device-width: 1600px) and (-webkit-min-device-pixel-ratio: 1) { 
     .blinds-category-grid-banner-svg {
-        width: 190px;
-        height: 100px;
+        width: 210px;
+        height: 210px;
     }
+}
+
+/*Banner Texts*/
+.blinds-category-grid-banner-texts {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 0px;
+    gap: 0px;
+    z-index: 3;
+    box-sizing: border-box;
+    transform: rotate(-45deg);
+}
+
+.blinds-category-grid-small-text {
+    font-size: 26px;
+    color: white;
+    text-align: center;
+    margin: 0px;
+    padding: 0px;
+    line-height: 1;
+}
+
+.blinds-category-grid-large-text {
+    font-size: 55px;
+    color: white;
+    font-weight: bold;
+    line-height: 0.8;
+    text-align: center;
+    word-break: break-word;
+    margin: 0px;
+    padding: 0px;
 }
