@@ -5,7 +5,6 @@
 }
 
 .blinds-category-item {
-    /* width: calc((100% - 60px) / 3); */
     width: 100%;
     min-height: 457px;
     border-radius: 12px;
@@ -98,6 +97,12 @@
     }
 }
 
+@media (min-width: 768px) and (max-width: 1024px) {
+    .blinds-category-item-link {
+        width: calc((100% - 30px) / 1); /* Tablet: 2 items per row */
+    }
+}
+
 .blinds-category-banner {
     position: absolute;
     top: 0;
@@ -122,14 +127,6 @@
     }
 }
 
-/*Laptops*/
-@media screen and (min-device-width: 1200px) and (max-device-width: 1600px) and (-webkit-min-device-pixel-ratio: 1) { 
-    .blinds-category-grid-banner-svg {
-        width: 210px;
-        height: 210px;
-    }
-}
-
 /*Banner Texts*/
 .blinds-category-grid-banner-texts {
     position: absolute;
@@ -144,21 +141,14 @@
 }
 
 .blinds-category-grid-small-text {
-    font-size: 26px;
     color: white;
     text-align: center;
-    margin: 0px;
-    padding: 0px;
-    line-height: 1;
+    line-height: 0.7;
 }
 
 .blinds-category-grid-large-text {
-    font-size: 55px;
     color: white;
     font-weight: bold;
     line-height: 0.8;
     text-align: center;
-    word-break: break-word;
-    margin: 0px;
-    padding: 0px;
 }
