@@ -1,0 +1,99 @@
+.blinds-categories-grid-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.blinds-category-item {
+    /* width: calc((100% - 60px) / 3); */
+    width: 100%;
+    min-height: 457px;
+    border-radius: 12px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    overflow: hidden;
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.blinds-category-item::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 1;
+}
+
+.blinds-category-item-title,
+.blinds-category-item-content {
+    position: absolute;
+    bottom: 15px; 
+    text-align: center;
+    z-index: 2;
+    margin: 0;
+}
+
+.blinds-category-item-title {
+    transition: transform 0.3s ease;
+    will-change: transform;
+    left: 6px;    
+    right: 6px;   
+}
+
+.blinds-category-item-content {
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.5s ease;
+    transition-property: opacity, visibility;
+    left: 15px;    
+    right: 15px;   
+}
+
+/* Hover states */
+.blinds-category-item:hover::before { opacity: 1; }
+.blinds-category-item:hover .blinds-category-item-content {
+    opacity: 1;
+    visibility: visible;
+}
+
+.blinds-category-item:hover .blinds-category-item-title { transform: translateY(-100%); }
+
+
+.blinds-category-item-link {
+    text-decoration: none;
+    width: calc((100% - 60px) / 3);
+    display: block;
+}
+
+@media (max-width: 767px) {
+    .blinds-category-item {
+        min-height: 357px;
+    }
+
+    .blinds-category-item-link{
+        width: 100%;
+    }
+
+    .blinds-category-item-content {
+        display: none;
+    }
+    
+    /* Prevent title movement on mobile */
+    .blinds-category-item:hover .blinds-category-item-title {
+        transform: none;
+    }
+    
+    /* Optional: Remove hover overlay effect on mobile */
+    .blinds-category-item:hover::before {
+        opacity: 0;
+    }
+
+    .blinds-categories-grid-container{
+        gap: 13px;
+    }
+}

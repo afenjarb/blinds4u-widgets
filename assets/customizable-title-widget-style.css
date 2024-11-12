@@ -1,0 +1,33 @@
+.blinds-custom-title-align {
+    width: 100%;
+    display: block;
+}
+
+.blinds-custom-title-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: inherit;
+    width: 100%;
+    padding: 0 0.2em;
+    font-size: 1em;
+    gap: 0;
+}
+
+.blinds-custom-title-container {
+    display: flex;
+    width: 100%;
+    justify-content: inherit;
+}
+
+.blinds-custom-title {
+    font-weight: bold;
+    position: relative;
+    z-index: 2;
+    display: inline-block;
+}
+
+.blinds-title-underline-svg {
+    z-index: 1;
+    pointer-events: none;
+}
